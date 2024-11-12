@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { easeOutExpo } from "@/lib/easings.data";
+import { cn } from "@/lib/utils";
 import { useAppContext } from "@/stores/app-context";
 import { CardSwipeDirection, IsDragOffBoundary } from "@/types/app";
 
@@ -69,9 +70,21 @@ const UserCards = () => {
 
   return (
     <motion.div
-      className={`flex h-full min-h-screen flex-col items-center justify-center p-5 ${
-        isDragging ? "cursor-grabbing" : ""
-      }`}
+      initial={{ backgroundColor: "none" }}
+      animate={{
+        backgroundColor:
+          isDragOffBoundary === "left"
+            ? "#eb5465"
+            : isDragOffBoundary === "right"
+              ? "#8cd14b"
+              : "rgba(0,0,0,0)",
+      }}
+      transition={{ duration: 0.3 }}
+      className={cn(
+        `flex h-full min-h-screen flex-col items-center p-5 pt-[50px] ${
+          isDragging ? "cursor-grabbing" : ""
+        }`
+      )}
     >
       <div
         id="userUIWrapper"
@@ -79,7 +92,7 @@ const UserCards = () => {
       >
         <div
           id="cardsWrapper"
-          className="relative z-10 mb-[50px] aspect-[100/150] w-full max-w-xs"
+          className="relative z-10 aspect-[78/150] h-fit w-full max-w-xs"
         >
           <AnimatePresence>
             {userCards.map((card, i) => {

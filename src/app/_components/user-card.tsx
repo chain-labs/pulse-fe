@@ -2,13 +2,14 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 
-import { useMediaQuery } from "usehooks-ts";
 import {
+  AnimatePresence,
   motion,
   useMotionValue,
   useMotionValueEvent,
   useTransform,
 } from "framer-motion";
+import { useMediaQuery } from "usehooks-ts";
 
 import { IsDragOffBoundary } from "@/types/app";
 
@@ -71,37 +72,81 @@ const UserCard = ({
   return (
     <>
       <motion.div
-        id={`cardContent-${id}`}
-        className="pointer-events-none absolute aspect-[100/150] w-full select-none rounded-lg bg-white p-2 shadow-card"
+        id={`cardDriverWrapper-${id}`}
+        // className={`absolute aspect-[100/150] w-full ${
+        //   !isDragging ? "hover:cursor-grab" : ""
+        // }`}
+        drag="x"
+        dragSnapToOrigin
+        dragElastic={isMobile ? 0.2 : 0.06}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragTransition={{ bounceStiffness: 1000, bounceDamping: 50 }}
+        onDragStart={() => setIsDragging(true)}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
+        onDrag={(_, info) => {
+          const offset = info.offset.x;
+
+          if (offset < 0 && offset < offsetBoundary * -1) {
+            setIsDragOffBoundary("left");
+          } else if (offset > 0 && offset > offsetBoundary) {
+            setIsDragOffBoundary("right");
+          } else {
+            setIsDragOffBoundary(null);
+          }
+        }}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
+        onDragEnd={(_, info) => {
+          setIsDragging(false);
+          setIsDragOffBoundary(null);
+          const isOffBoundary =
+            info.offset.x > offsetBoundary || info.offset.x < -offsetBoundary;
+          const direction = info.offset.x > 0 ? "right" : "left";
+
+          if (isOffBoundary) {
+            setDirection(direction);
+          }
+        }}
+        // id={`cardContent-${id}`}
+        className="absolute aspect-[100/150] w-full select-none rounded-lg bg-white p-2 shadow-card"
         style={{
           x: drivenX,
           y: drivenY,
           rotate: drivenRotation,
         }}
       >
-        <div className="relative mx-auto mt-2 grid w-full grid-cols-2 grid-rows-2 gap-2">
-          <img
-            src={data.picturesUrl[selectedPictureIndex]} // Adjust path based on image structure
-            alt="User"
-            className={
-              "col-span-2 aspect-square h-auto w-auto rounded-lg object-cover transition-opacity duration-500"
-            }
-          />
-          {data.picturesUrl.map(
-            (url, idx) =>
-              selectedPictureIndex !== idx && (
-                <img
-                  onClick={() => setSelectedPictureIndex(idx)}
-                  key={id + url + Math.random()}
-                  src={url} // Adjust path based on image structure
-                  alt="User"
-                  className={
-                    "aspect-square h-auto w-auto cursor-pointer rounded-lg object-cover transition-opacity duration-500"
-                  }
-                />
-              )
-          )}
-        </div>
+        <motion.div
+          className="relative mx-auto mt-2 w-full gap-2"
+          style={{
+            display: "grid",
+            gridTemplateAreas: `'main main'
+                                'second third'`,
+          }}
+        >
+          <AnimatePresence>
+            {data.picturesUrl.map((url, idx) => (
+              <motion.img
+                // layoutId={`user-card-image-${idx}`}
+                onClick={() => setSelectedPictureIndex(idx)}
+                key={id + url + Math.random()}
+                src={url}
+                alt="User"
+                style={{
+                  gridArea:
+                    idx === selectedPictureIndex
+                      ? "main"
+                      : (idx === 1 && selectedPictureIndex !== 2) || idx === 0
+                        ? "second"
+                        : "third",
+                }}
+                className={
+                  "aspect-square h-auto w-auto cursor-pointer rounded-lg object-cover transition-opacity duration-500"
+                }
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
         <div className="flex w-full flex-col items-baseline justify-between gap-2">
           <h1 className="text-[24px] font-bold">{data.name}</h1>
           <p className="text-[16px]">{data.bio}</p>
