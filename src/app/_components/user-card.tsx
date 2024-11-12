@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import {
   AnimatePresence,
@@ -9,8 +9,10 @@ import {
   useMotionValueEvent,
   useTransform,
 } from "framer-motion";
+import Moralis from "moralis";
 import { useMediaQuery } from "usehooks-ts";
 
+import { useLocalStorage } from "@/stores/localstorage";
 import { IsDragOffBoundary } from "@/types/app";
 
 type Props = {
@@ -38,6 +40,7 @@ const UserCard = ({
   setIsDragOffBoundary,
   setDirection,
 }: Props) => {
+  const localstorageUserInfo = useLocalStorage();
   const x = useMotionValue(0);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -69,6 +72,29 @@ const UserCard = ({
 
   const [selectedPictureIndex, setSelectedPictureIndex] = useState(0);
 
+  const [totalTransactions, setTotalTransactions] = useState(0);
+
+  useEffect(() => {
+    async function getTransactions() {
+      try {
+        await Moralis.start({
+          apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
+        });
+
+        const response = await Moralis.EvmApi.wallets.getWalletStats({
+          chain: "0x1",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        console.log("response: ----", response.result.transactions.total);
+        setTotalTransactions(Number(response.result.transactions.total));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    getTransactions();
+  }, [localstorageUserInfo]);
+
   return (
     <>
       <motion.div
@@ -84,8 +110,7 @@ const UserCard = ({
           className="relative mx-auto w-full gap-2"
           style={{
             display: "grid",
-            gridTemplateAreas: `'main main'
-                                'second third'`,
+            gridTemplateAreas: `'main second third'`,
           }}
         >
           <AnimatePresence>
@@ -114,8 +139,9 @@ const UserCard = ({
           </AnimatePresence>
         </motion.div>
         <div className="flex w-full flex-col items-baseline justify-between">
-          <h1 className="text-[32px] font-bold font-mono">{data.name}</h1>
-          <p className="text-[16px] font-sans">{data.bio}</p>
+          <h1 className="font-mono text-[32px] font-bold">{data.name}</h1>
+          <p className="font-sans text-[16px]">{data.bio}</p>
+          <p className="rounded-full px-6 py-1 text-[12px] font-bold font-sans bg-[#FFB730] mx-auto">Total Transactions Done: 5</p>
         </div>
 
         {/* Add relevant data fields */}
@@ -164,5 +190,3 @@ const UserCard = ({
 };
 
 export default UserCard;
-
-

@@ -144,7 +144,7 @@ export default function Signin() {
                 <Input
                   id="telegramId"
                   {...register("telegramId")}
-                  placeholder="@username"
+                  placeholder="eg. @username"
                 />
                 {errors.telegramId && (
                   <p className="text-sm text-red-500">
@@ -193,7 +193,7 @@ export default function Signin() {
                     {...register("isAdult")}
                     className="mr-2 h-4 w-4"
                   />
-                  I confirm that I am at least 18 years old
+                  *I confirm that I am at least 18 years old and I'm using this app with my own consent.
                 </Label>
                 {errors.isAdult && (
                   <p className="text-sm text-red-500">

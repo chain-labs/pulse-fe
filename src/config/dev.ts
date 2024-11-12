@@ -1,4 +1,3 @@
 export const devepmentConfig = {
-  mode: "development",
-  devtool: "source-map",
+  WEBSOCKET_URL: "ws://localhost:8080",
 };

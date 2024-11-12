@@ -35,10 +35,15 @@ const UserCompletion = () => {
               }}
               className="relative z-10 flex flex-col items-center justify-center text-center"
             >
-              <h1 className="leading-tight">End of line</h1>
+              <h1 className="leading-tight">Out of all people around you</h1>
               <motion.div className="mt-8" whileTap={{ scale: 0.9 }}>
-                <Button onClick={() => handleReplay()} className="font-medium">
-                  Get to next line
+                <Button
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                  className="font-medium"
+                >
+                  Refresh
                 </Button>
               </motion.div>
             </motion.div>

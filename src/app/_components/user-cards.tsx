@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
+import { devepmentConfig } from "@/config/dev";
 import { easeOutExpo } from "@/lib/easings.data";
 import { cn } from "@/lib/utils";
 import { useAppContext } from "@/stores/app-context";
+import { useLocalStorage } from "@/stores/localstorage";
 import { CardSwipeDirection, IsDragOffBoundary } from "@/types/app";
 
 import UserActionBtn from "./user-action-btn";
@@ -20,14 +22,71 @@ export const initialDrivenProps = {
 
 const UserCards = () => {
   const [userCards, setUserCards] = useAppContext();
+  const [, setMatches] = useState<string[]>([]);
   const [cardDrivenProps, setCardDrivenProps] = useState(initialDrivenProps);
   const [direction, setDirection] = useState<"left" | "right" | "">("");
   const [isDragging, setIsDragging] = useState(false);
   const [isDragOffBoundary, setIsDragOffBoundary] =
     useState<IsDragOffBoundary>(null);
+  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const [currentProfileIndex, setCurrentProfileIndex] = useState(0);
+
+  const localstorageUserInfo = useLocalStorage();
+
+  useEffect(() => {
+    const userInfo = localstorageUserInfo;
+    const ws = new WebSocket(devepmentConfig.WEBSOCKET_URL);
+    ws.onopen = () => {
+      ws.send(
+        JSON.stringify({ type: "join", sessionId: "global-session", userInfo })
+      );
+    };
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "sessionUpdate") {
+        const filteredProfiles = data.users.filter(
+          (profile: UserInfo) => profile.telegramId !== userInfo.telegramId
+        ); // Exclude your own profile
+        setUserCards(filteredProfiles);
+      }
+      if (data.type === "match") setMatches((prev) => [...prev, data.handle]);
+    };
+    ws.onclose = () => console.log("Disconnected from WebSocket");
+    setSocket(ws);
+    return () => ws.close();
+  }, [localstorageUserInfo]);
+
+  const swipeRight = async () => {
+    const userInfo = localstorageUserInfo;
+    if (socket && userCards.length > 0) {
+      const currentProfile = userCards[currentProfileIndex];
+      await socket.send(
+        JSON.stringify({
+          type: "swipe",
+          sessionId: "global-session",
+          userInfo,
+          swipeTarget: currentProfile.telegramId,
+        })
+      );
+    }
+
+    // nextProfile();
+  };
+
+  const swipeLeft = () => {
+    nextProfile();
+  };
+  const nextProfile = () => {
+    setCurrentProfileIndex((prevIndex) => (prevIndex + 1) % userCards.length); // Loop endlessly
+  };
 
   useEffect(() => {
     if (["left", "right"].includes(direction)) {
+      if (direction === "right") {
+        swipeRight().then(() => nextProfile());
+      } else {
+        swipeLeft();
+      }
       setUserCards(
         userCards.slice(0, -1) // Remove the first card
       );
@@ -92,7 +151,7 @@ const UserCards = () => {
       >
         <div
           id="cardsWrapper"
-          className="relative z-10 aspect-[78/150] h-fit w-full max-w-xs"
+          className="relative z-10 aspect-[100/150] h-fit w-full max-w-xs"
         >
           <AnimatePresence>
             {userCards.map((card, i) => {
