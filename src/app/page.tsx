@@ -9,7 +9,7 @@ export default function Home() {
   const { everyDataAvailabe } = useLocalStorage();
   return (
     <div className="mx-auto min-h-screen w-full max-w-[700px]">
-      {everyDataAvailabe ? <App /> : <Signin />}
+      {everyDataAvailabe && false ? <App /> : <Signin />}
     </div>
   );
 }

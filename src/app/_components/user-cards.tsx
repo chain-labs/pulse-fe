@@ -16,7 +16,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { devepmentConfig } from "@/config/dev";
 import { easeOutExpo } from "@/lib/easings.data";
 import { cn } from "@/lib/utils";
 import { useAppContext } from "@/stores/app-context";
@@ -35,7 +34,6 @@ export const initialDrivenProps = {
 
 const UserCards = () => {
   const [userCards, setUserCards] = useAppContext();
-  const [matches, setMatches] = useState<string[]>([]);
   const drawerRef = useRef<HTMLButtonElement>(null);
   const [recentMatch, setRecentMatch] = useState<UserInfo>();
   const [cardDrivenProps, setCardDrivenProps] = useState(initialDrivenProps);
@@ -170,7 +168,7 @@ const UserCards = () => {
         }}
         transition={{ duration: 0.3 }}
         className={cn(
-          `flex h-full min-h-screen flex-col items-center p-5 pt-[50px] ${
+          `flex h-full min-h-screen flex-col items-center justify-center p-5 pt-[50px] ${
             isDragging ? "cursor-grabbing" : ""
           }`
         )}
@@ -183,39 +181,42 @@ const UserCards = () => {
             id="cardsWrapper"
             className="relative z-10 aspect-[100/150] h-fit w-full max-w-xs"
           >
-            <AnimatePresence>
-              {userCards.map((card, i) => {
-                const isLast = i === userCards.length - 1;
-                const isUpcoming = i === userCards.length - 2;
-                return (
-                  <motion.div
-                    key={`card-${i}`}
-                    id={`card-${card.walletAddress}`}
-                    className={"relative shadow-sm"}
-                    variants={cardVariants}
-                    initial="remainings"
-                    animate={
-                      isLast
-                        ? "current"
-                        : isUpcoming
-                          ? "upcoming"
-                          : "remainings"
-                    }
-                    exit="exit"
-                  >
-                    <UserCard
-                      data={card}
-                      id={card.walletAddress}
-                      setCardDrivenProps={setCardDrivenProps}
-                      isDragging={isDragging}
-                      setIsDragging={setIsDragging}
-                      setIsDragOffBoundary={setIsDragOffBoundary}
-                      setDirection={setDirection}
-                    />
-                  </motion.div>
-                );
-              })}
-              {userCards.length === 0 && <UserCompletion />}
+            <AnimatePresence mode="wait">
+              {userCards.length === 0 ? (
+                <UserCompletion />
+              ) : (
+                userCards.map((card, i) => {
+                  const isLast = i === userCards.length - 1;
+                  const isUpcoming = i === userCards.length - 2;
+                  return (
+                    <motion.div
+                      key={`card-${i}`}
+                      id={`card-${card.walletAddress}`}
+                      className={"relative shadow-sm"}
+                      variants={cardVariants}
+                      initial="remainings"
+                      animate={
+                        isLast
+                          ? "current"
+                          : isUpcoming
+                            ? "upcoming"
+                            : "remainings"
+                      }
+                      exit="exit"
+                    >
+                      <UserCard
+                        data={card}
+                        id={card.walletAddress}
+                        setCardDrivenProps={setCardDrivenProps}
+                        isDragging={isDragging}
+                        setIsDragging={setIsDragging}
+                        setIsDragOffBoundary={setIsDragOffBoundary}
+                        setDirection={setDirection}
+                      />
+                    </motion.div>
+                  );
+                })
+              )}
             </AnimatePresence>
           </div>
           <div

@@ -2,15 +2,9 @@
 
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
 
-import { useAppContext } from "@/stores/app-context";
-
 import { UserCards } from "./_components";
-import UserCompletion from "./_components/user-completion";
 
 const User = () => {
-  const [userCards] = useAppContext();
-
-  const isCardStockEmpty = userCards.length === 0;
   const userScreenVariants = {
     initial: {
       opacity: 0,
@@ -28,29 +22,16 @@ const User = () => {
   return (
     <main className="bg-userSwipe-neutral mx-auto h-full min-h-screen">
       <AnimatePresence mode="wait">
-        {true ? (
-          <motion.div
-            key="userScreen1"
-            id="userScreen"
-            variants={userScreenVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-          >
-            <UserCards />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="userScreen2"
-            id="userCompletion"
-            variants={userScreenVariants}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-          >
-            <UserCompletion />
-          </motion.div>
-        )}
+        <motion.div
+          key="userScreen1"
+          id="userScreen"
+          variants={userScreenVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
+          <UserCards />
+        </motion.div>
       </AnimatePresence>
     </main>
   );
