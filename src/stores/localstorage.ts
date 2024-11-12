@@ -31,6 +31,7 @@ export const useLocalStorage = create<LocalStorage>()((set) => ({
       getItemFromLocalStorage("bio") &&
       getItemFromLocalStorage("picturesUrl")
   ),
+  matches: JSON.parse(getItemFromLocalStorage("matches") || "{}"),
   setName: (name: string) => {
     setItemToLocalStorage("name", name);
     set({ name });
@@ -53,5 +54,11 @@ export const useLocalStorage = create<LocalStorage>()((set) => ({
   },
   setEveryDataAvailabe: (everyDataAvailabe: boolean) => {
     set({ everyDataAvailabe });
+  },
+  addMatch: (match: UserInfo) => {
+    const matches = JSON.parse(getItemFromLocalStorage("matches") || "{}");
+    matches[match.telegramId] = match;
+    setItemToLocalStorage("matches", JSON.stringify(matches));
+    set({ matches: JSON.parse(getItemFromLocalStorage("matches") || "{}") });
   },
 }));

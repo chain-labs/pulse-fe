@@ -59,20 +59,17 @@ const UserCards = () => {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === "sessionUpdate") {
-        const swipes = data.users.find(
-          (profile: UserInfo) => profile.telegramId === userInfo.telegramId
-        )?.swipes;
         const filteredProfiles = data.users.filter((profile: UserInfo) => {
           // remove matches
           return (
-            !swipes[profile.telegramId] &&
+            !localstorageUserInfo.matches[profile.telegramId] &&
             profile.telegramId !== userInfo.telegramId
           );
         }); // Exclude your own profile
         setUserCards(filteredProfiles);
       }
       if (data.type === "match") {
-        setMatches((prev) => [...prev, data.handle]);
+        localstorageUserInfo.addMatch(data.handle);
         setRecentMatch(data.handle);
       }
     };
@@ -80,10 +77,6 @@ const UserCards = () => {
     setSocket(ws);
     return () => ws.close();
   }, [localstorageUserInfo]);
-
-  // console.log('backupUserCards', backupUserCards);
-
-  console.log("recentMatch", userCards);
 
   const swipeRight = async () => {
     const userInfo = localstorageUserInfo;
