@@ -126,7 +126,7 @@ export default function Signin() {
         <Card className="w-full">
           <CardHeader>
             <CardTitle className="font-mono text-2xl font-bold">
-              Welcome to Pulse
+              Welcome to Stumble
             </CardTitle>
             <p>
               Create your account to get started. Your profile will be visible
