@@ -50,7 +50,7 @@ const UserCards = () => {
 
   useEffect(() => {
     const userInfo = localstorageUserInfo;
-    const ws = new WebSocket(devepmentConfig.WEBSOCKET_URL);
+    const ws = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL ?? "");
     ws.onopen = () => {
       ws.send(
         JSON.stringify({ type: "join", sessionId: "global-session", userInfo })
