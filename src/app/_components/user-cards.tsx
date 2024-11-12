@@ -48,7 +48,7 @@ const UserCards = () => {
       transition: { duration: 0.3, ease: easeOutExpo },
     },
     upcoming: {
-      opacity: 0.5,
+      opacity: 0.75,
       y: 67,
       scale: 0.9,
       transition: { duration: 0.3, ease: easeOutExpo, delay: 0 },
@@ -102,7 +102,7 @@ const UserCards = () => {
                 <motion.div
                   key={`card-${i}`}
                   id={`card-${card.walletAddress}`}
-                  className={"relative"}
+                  className={"relative shadow-sm"}
                   variants={cardVariants}
                   initial="remainings"
                   animate={

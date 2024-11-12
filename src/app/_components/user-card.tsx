@@ -73,7 +73,7 @@ const UserCard = ({
     <>
       <motion.div
         id={`cardContent-${id}`}
-        className="absolute aspect-[100/150] w-full select-none rounded-lg bg-white p-2 shadow-card"
+        className="absolute aspect-[100/150] w-full select-none rounded-lg bg-white p-4 shadow-card"
         style={{
           x: drivenX,
           y: drivenY,
@@ -81,7 +81,7 @@ const UserCard = ({
         }}
       >
         <motion.div
-          className="relative mx-auto mt-2 w-full gap-2"
+          className="relative mx-auto w-full gap-2"
           style={{
             display: "grid",
             gridTemplateAreas: `'main main'
@@ -96,6 +96,8 @@ const UserCard = ({
                 key={id + url + Math.random()}
                 src={url}
                 alt="User"
+                width={100}
+                height={100}
                 style={{
                   gridArea:
                     idx === selectedPictureIndex
@@ -111,9 +113,9 @@ const UserCard = ({
             ))}
           </AnimatePresence>
         </motion.div>
-        <div className="flex w-full flex-col items-baseline justify-between gap-2">
-          <h1 className="text-[24px] font-bold">{data.name}</h1>
-          <p className="text-[16px]">{data.bio}</p>
+        <div className="flex w-full flex-col items-baseline justify-between">
+          <h1 className="text-[32px] font-bold font-mono">{data.name}</h1>
+          <p className="text-[16px] font-sans">{data.bio}</p>
         </div>
 
         {/* Add relevant data fields */}
@@ -162,4 +164,5 @@ const UserCard = ({
 };
 
 export default UserCard;
+
 

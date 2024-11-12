@@ -99,11 +99,11 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center py-6 sm:py-12">
+    <div className="flex min-h-screen flex-col justify-center py-6 sm:py-12 font-sans">
       <div className="relative mx-[16px] py-3">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">
+            <CardTitle className="text-2xl font-bold font-mono">
               Welcome to Pulse
             </CardTitle>
             <p>
@@ -205,7 +205,7 @@ export default function Signin() {
               <Button type="submit" className="w-full">
                 Submit
               </Button>
-              <span>
+              <span className="text-[14px]">
                 by submitting you agree to our{" "}
                 <a
                   href="https://github.com/chain-labs/pulse-fe/blob/main/terms-conditions.md"
