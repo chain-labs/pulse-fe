@@ -59,7 +59,9 @@ const UserCards = () => {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === "sessionUpdate") {
-        const swipes = data.users.find((profile: UserInfo) => profile.telegramId === userInfo.telegramId)?.swipes;
+        const swipes = data.users.find(
+          (profile: UserInfo) => profile.telegramId === userInfo.telegramId
+        )?.swipes;
         const filteredProfiles = data.users.filter((profile: UserInfo) => {
           // remove matches
           return (
@@ -81,7 +83,7 @@ const UserCards = () => {
 
   // console.log('backupUserCards', backupUserCards);
 
-  console.log('recentMatch', userCards);
+  console.log("recentMatch", userCards);
 
   const swipeRight = async () => {
     const userInfo = localstorageUserInfo;
@@ -215,11 +217,7 @@ const UserCards = () => {
                 </motion.div>
               );
             })}
-            {
-              userCards.length === 0 && (
-                <UserCompletion />
-              )
-            }
+            {userCards.length === 0 && <UserCompletion />}
           </AnimatePresence>
         </div>
         <div

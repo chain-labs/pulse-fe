@@ -109,7 +109,7 @@ const UserCard = ({
           className="relative mx-auto w-full gap-2"
           style={{
             display: "grid",
-            gridTemplateAreas: `'main second third'`,
+            gridTemplateAreas: "main second third",
           }}
         >
           <AnimatePresence>
