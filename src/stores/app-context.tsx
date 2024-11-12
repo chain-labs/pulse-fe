@@ -2,7 +2,8 @@
 
 import { createContext, useContext, useState } from "react";
 
-const useUserState = (initialUserCards: UserInfo[]) => useState<UserInfo[]>(initialUserCards);
+const useUserState = (initialUserCards: UserInfo[]) =>
+  useState<UserInfo[]>(initialUserCards);
 
 const AppContext = createContext<ReturnType<typeof useUserState> | null>(null);
 

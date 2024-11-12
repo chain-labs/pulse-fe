@@ -7,4 +7,3 @@ interface UserInfo {
   rightSwipes?: [];
   leftSwipes?: [];
 }
-

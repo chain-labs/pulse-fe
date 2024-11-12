@@ -18,16 +18,18 @@ function setItemToLocalStorage(key: string, value: string) {
 
 export const useLocalStorage = create<LocalStorage>()((set) => ({
   name: getItemFromLocalStorage("name") || undefined,
-  walletAddress: (getItemFromLocalStorage("walletAddress") as `0x${string}`) || undefined,
-  telegramId: (getItemFromLocalStorage("telegramId") as `@${string}`) || undefined,
+  walletAddress:
+    (getItemFromLocalStorage("walletAddress") as `0x${string}`) || undefined,
+  telegramId:
+    (getItemFromLocalStorage("telegramId") as `@${string}`) || undefined,
   bio: getItemFromLocalStorage("bio") || undefined,
   picturesUrl: JSON.parse(getItemFromLocalStorage("picturesUrl") || "[]"),
   everyDataAvailabe: Boolean(
     getItemFromLocalStorage("name") &&
-    getItemFromLocalStorage("walletAddress") &&
-    getItemFromLocalStorage("telegramId") &&
-    getItemFromLocalStorage("bio") &&
-    getItemFromLocalStorage("picturesUrl")
+      getItemFromLocalStorage("walletAddress") &&
+      getItemFromLocalStorage("telegramId") &&
+      getItemFromLocalStorage("bio") &&
+      getItemFromLocalStorage("picturesUrl")
   ),
   setName: (name: string) => {
     setItemToLocalStorage("name", name);

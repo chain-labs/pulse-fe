@@ -2,7 +2,7 @@
 
 import { Dispatch, SetStateAction, useState } from "react";
 
-import { useMediaQuery } from "@uidotdev/usehooks";
+import { useMediaQuery } from "usehooks-ts";
 import {
   motion,
   useMotionValue,
@@ -96,7 +96,7 @@ const UserCard = ({
                   src={url} // Adjust path based on image structure
                   alt="User"
                   className={
-                    "aspect-square h-auto w-auto rounded-lg object-cover transition-opacity duration-500 cursor-pointer"
+                    "aspect-square h-auto w-auto cursor-pointer rounded-lg object-cover transition-opacity duration-500"
                   }
                 />
               )

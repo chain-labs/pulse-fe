@@ -15,6 +15,6 @@
     "**/lib/**/*.tsx": "${filename} - Library",
     "**/utils/**/*.ts": "${filename} - Utility",
     "**/types/**/*.ts": "${filename} - Type",
-    "**/stores/**/*.ts": "${filename} - Store",
+    "**/stores/**/*.ts": "${filename} - Store"
   }
 }

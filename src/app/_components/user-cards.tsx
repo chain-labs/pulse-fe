@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { easeOutExpo } from "@/lib/easings.data";
+import { useAppContext } from "@/stores/app-context";
 import { CardSwipeDirection, IsDragOffBoundary } from "@/types/app";
 
 import UserActionBtn from "./user-action-btn";
 import UserCard from "./user-card";
-import { useAppContext } from "@/stores/app-context";
 
 export const initialDrivenProps = {
   cardWrapperX: 0,

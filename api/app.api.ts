@@ -69,4 +69,5 @@ export const UserCards: UserInfo[] = [
 
 export const getUserCards = async (): Promise<UserInfo[]> => UserCards;
 
-export const getReverseUserCards = async (): Promise<UserInfo[]> => UserCards.slice().reverse();
+export const getReverseUserCards = async (): Promise<UserInfo[]> =>
+  UserCards.slice().reverse();

@@ -37,7 +37,9 @@ const UserCompletion = () => {
             >
               <h1 className="leading-tight">End of line</h1>
               <motion.div className="mt-8" whileTap={{ scale: 0.9 }}>
-                <Button onClick={() => handleReplay()} className="font-medium">Get to next line</Button>
+                <Button onClick={() => handleReplay()} className="font-medium">
+                  Get to next line
+                </Button>
               </motion.div>
             </motion.div>
           </div>

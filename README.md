@@ -44,16 +44,15 @@ src
 +-- utils             # shared utility functions
 ```
 
-# Prettier 
+# Prettier
 
-trivago configuration -  https://github.com/trivago/prettier-plugin-sort-imports
+trivago configuration - https://github.com/trivago/prettier-plugin-sort-imports
 
 tailwindcss configuration - https://tailwindcss.com/blog/automatic-class-sorting-with-prettier
 
 # File naming convention
 
 only KEBAB_CASE - https://github.com/alan2207/bulletproof-react/blob/master/docs/project-standards.md#file-naming-conventions
-
 
 # Typed routes
 
@@ -68,4 +67,3 @@ framer motion - https://www.framer.com/motion/
 zod - https://zod.dev/
 
 zustand - https://zustand.docs.pmnd.rs/getting-started/introduction
-

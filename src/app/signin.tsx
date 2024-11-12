@@ -123,7 +123,7 @@ export default function Signin() {
 
   return (
     <div className="flex min-h-screen flex-col justify-center bg-gray-100 py-6 sm:py-12">
-      <div className="relative py-3 mx-[16px]">
+      <div className="relative mx-[16px] py-3">
         <Card className="w-full">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">Sign In</CardTitle>

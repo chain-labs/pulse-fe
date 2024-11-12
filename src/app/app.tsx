@@ -8,7 +8,7 @@ import { UserCards } from "./_components";
 import UserCompletion from "./_components/user-completion";
 
 const User = () => {
-  const [userCards,] = useAppContext();
+  const [userCards] = useAppContext();
 
   const isCardStockEmpty = userCards.length === 0;
   const userScreenVariants = {
