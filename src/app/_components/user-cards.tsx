@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { devepmentConfig } from "@/config/dev";
 import { easeOutExpo } from "@/lib/easings.data";
 import { cn } from "@/lib/utils";
@@ -13,6 +23,7 @@ import { CardSwipeDirection, IsDragOffBoundary } from "@/types/app";
 
 import UserActionBtn from "./user-action-btn";
 import UserCard from "./user-card";
+import { Button } from "@/components/ui/button";
 
 export const initialDrivenProps = {
   cardWrapperX: 0,
@@ -202,6 +213,22 @@ const UserCards = () => {
             onClick={() => handleActionBtnOnClick("right")}
           />
         </div>
+        <Drawer>
+          <DrawerTrigger>Open</DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>MATCH FOUND</DrawerTitle>
+              <DrawerDescription>
+                <
+              </DrawerDescription>
+            </DrawerHeader>
+            <DrawerFooter>
+              <DrawerClose>
+                <Button variant="outline">Close</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
       </div>
     </motion.div>
   );
