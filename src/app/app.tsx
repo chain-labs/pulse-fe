@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
-import { PiHeartDuotone, PiLink } from "react-icons/pi";
+import { PiHeartDuotone, PiLink, PiUserCircleDuotone } from "react-icons/pi";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,9 +17,11 @@ import {
 import { useLocalStorage } from "@/stores/localstorage";
 
 import { UserCards } from "./_components";
+import SingleUserCard from "./_components/single-user-card";
 
 const User = () => {
-  const { matches } = useLocalStorage();
+  const userData = useLocalStorage();
+  const matches = userData?.matches ?? {};
 
   const userScreenVariants = {
     initial: {
@@ -49,8 +51,9 @@ const User = () => {
           <UserCards />
         </motion.div>
       </AnimatePresence>
+      {/* user matches */}
       <Drawer>
-        {Object.keys(matches).length && (
+        {!!Object.keys(matches).length && (
           <DrawerTrigger className="fixed bottom-0 right-0 m-4">
             <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
               <PiHeartDuotone className="scale-[1.75] text-[#e40829]" />
@@ -61,7 +64,7 @@ const User = () => {
           <DrawerHeader>
             <DrawerTitle>MATCHES</DrawerTitle>
             <DrawerDescription>
-              <hr className="my-2"/>
+              <hr className="my-2" />
               {Object.keys(matches).map((telegramId: string) => (
                 <div key={telegramId} className="flex flex-col gap-2">
                   <div className="flex items-center gap-2">
@@ -89,6 +92,29 @@ const User = () => {
                   <hr />
                 </div>
               ))}
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <DrawerClose>
+              <Button variant="outline">Close</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+      {/* user profile  */}
+      <Drawer>
+        {!!Object.keys(matches).length && (
+          <DrawerTrigger className="fixed bottom-0 left-0 m-4">
+            <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
+              <PiUserCircleDuotone className="scale-[1.75] text-[#5cfda2]" />
+            </Button>
+          </DrawerTrigger>
+        )}
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>PROFILE</DrawerTitle>
+            <DrawerDescription className="flex flex-wrap justify-start items-start gap-2 max-w-[300px] mx-auto">
+              <SingleUserCard data={userData as UserInfo} id="user" />
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
