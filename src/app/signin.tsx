@@ -68,6 +68,7 @@ export default function Signin() {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<UserInfo>({
     resolver: zodResolver(User),
   });
@@ -83,6 +84,20 @@ export default function Signin() {
 
   const onSubmit = async (data: UserInfo) => {
     try {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/check-telegram-id/${data.telegramId}`
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.exists === false) {
+            return;
+          }
+          setError("telegramId", {
+            type: "manual",
+            message: "Telegram ID already used",
+          });
+          throw new Error("Telegram ID already exists");
+        });
       setName(data.name);
       setWalletAddress(data.walletAddress as `0x${string}`);
       setTelegramId(data.telegramId as `@${string}`);
@@ -99,11 +114,11 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center py-6 sm:py-12 font-sans">
+    <div className="flex min-h-screen flex-col justify-center py-6 font-sans sm:py-12">
       <div className="relative mx-[16px] py-3">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold font-mono">
+            <CardTitle className="font-mono text-2xl font-bold">
               Welcome to Pulse
             </CardTitle>
             <p>
@@ -193,7 +208,8 @@ export default function Signin() {
                     {...register("isAdult")}
                     className="mr-2 h-4 w-4"
                   />
-                  *I confirm that I am at least 18 years old and I'm using this app with my own consent.
+                  *I confirm that I am at least 18 years old and I'm using this
+                  app with my own consent.
                 </Label>
                 {errors.isAdult && (
                   <p className="text-sm text-red-500">
