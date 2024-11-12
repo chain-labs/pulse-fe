@@ -81,12 +81,32 @@ const UserCard = ({
           apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
         });
 
-        const response = await Moralis.EvmApi.wallets.getWalletStats({
-          chain: "0x1",
+        const responseBase = await Moralis.EvmApi.wallets.getWalletStats({
+          chain: "base",
           address: localStorage.getItem("walletAddress") ?? "",
         });
 
-        setTotalTransactions(Number(response.result.transactions.total));
+        const responseEth = await Moralis.EvmApi.wallets.getWalletStats({
+          chain: "eth",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        const responseOptimism = await Moralis.EvmApi.wallets.getWalletStats({
+          chain: "optimism",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        const responseArbitrum = await Moralis.EvmApi.wallets.getWalletStats({
+          chain: "arbitrum",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        setTotalTransactions(
+          Number(responseBase.result.transactions.total) +
+            Number(responseEth.result.transactions.total) +
+            Number(responseOptimism.result.transactions.total) +
+            Number(responseArbitrum.result.transactions.total)
+        );
       } catch (e) {
         console.error(e);
       }
@@ -140,6 +160,7 @@ const UserCard = ({
         <div className="flex w-full flex-col items-baseline justify-between">
           <h1 className="font-mono text-[32px] font-bold">{data.name}</h1>
           <p className="font-sans text-[16px]">{data.bio}</p>
+
           <p className="mx-auto rounded-full bg-[#FFB730] px-6 py-1 font-sans text-[12px] font-bold">
             Total Transactions Done: {totalTransactions}
           </p>
