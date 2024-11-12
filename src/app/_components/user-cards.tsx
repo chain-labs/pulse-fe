@@ -164,117 +164,124 @@ const UserCards = () => {
   }, [recentMatch]);
 
   return (
-    <motion.div
-      initial={{ backgroundColor: "none" }}
-      animate={{
-        backgroundColor:
-          isDragOffBoundary === "left"
-            ? "#eb5465"
-            : isDragOffBoundary === "right"
-              ? "#8cd14b"
-              : "rgba(0,0,0,0)",
-      }}
-      transition={{ duration: 0.3 }}
-      className={cn(
-        `flex h-full min-h-screen flex-col items-center p-5 pt-[50px] ${
-          isDragging ? "cursor-grabbing" : ""
-        }`
-      )}
-    >
-      <div
-        id="userUIWrapper"
-        className="relative z-10 flex w-full flex-col items-center justify-center gap-6"
+    <>
+      <motion.div
+        initial={{ backgroundColor: "none" }}
+        animate={{
+          backgroundColor:
+            isDragOffBoundary === "left"
+              ? "#eb5465"
+              : isDragOffBoundary === "right"
+                ? "#8cd14b"
+                : "rgba(0,0,0,0)",
+        }}
+        transition={{ duration: 0.3 }}
+        className={cn(
+          `flex h-full min-h-screen flex-col items-center p-5 pt-[50px] ${
+            isDragging ? "cursor-grabbing" : ""
+          }`
+        )}
       >
         <div
-          id="cardsWrapper"
-          className="relative z-10 aspect-[100/150] h-fit w-full max-w-xs"
+          id="userUIWrapper"
+          className="relative z-10 flex w-full flex-col items-center justify-center gap-6"
         >
-          <AnimatePresence>
-            {userCards.map((card, i) => {
-              const isLast = i === userCards.length - 1;
-              const isUpcoming = i === userCards.length - 2;
-              return (
-                <motion.div
-                  key={`card-${i}`}
-                  id={`card-${card.walletAddress}`}
-                  className={"relative shadow-sm"}
-                  variants={cardVariants}
-                  initial="remainings"
-                  animate={
-                    isLast ? "current" : isUpcoming ? "upcoming" : "remainings"
-                  }
-                  exit="exit"
-                >
-                  <UserCard
-                    data={card}
-                    id={card.walletAddress}
-                    setCardDrivenProps={setCardDrivenProps}
-                    isDragging={isDragging}
-                    setIsDragging={setIsDragging}
-                    setIsDragOffBoundary={setIsDragOffBoundary}
-                    setDirection={setDirection}
-                  />
-                </motion.div>
-              );
-            })}
-            {userCards.length === 0 && <UserCompletion />}
-          </AnimatePresence>
+          <div
+            id="cardsWrapper"
+            className="relative z-10 aspect-[100/150] h-fit w-full max-w-xs"
+          >
+            <AnimatePresence>
+              {userCards.map((card, i) => {
+                const isLast = i === userCards.length - 1;
+                const isUpcoming = i === userCards.length - 2;
+                return (
+                  <motion.div
+                    key={`card-${i}`}
+                    id={`card-${card.walletAddress}`}
+                    className={"relative shadow-sm"}
+                    variants={cardVariants}
+                    initial="remainings"
+                    animate={
+                      isLast
+                        ? "current"
+                        : isUpcoming
+                          ? "upcoming"
+                          : "remainings"
+                    }
+                    exit="exit"
+                  >
+                    <UserCard
+                      data={card}
+                      id={card.walletAddress}
+                      setCardDrivenProps={setCardDrivenProps}
+                      isDragging={isDragging}
+                      setIsDragging={setIsDragging}
+                      setIsDragOffBoundary={setIsDragOffBoundary}
+                      setDirection={setDirection}
+                    />
+                  </motion.div>
+                );
+              })}
+              {userCards.length === 0 && <UserCompletion />}
+            </AnimatePresence>
+          </div>
+          <div
+            id="actions"
+            className="relative z-10 flex w-full items-center justify-center gap-8"
+          >
+            <UserActionBtn
+              direction="left"
+              ariaLabel="swipe left"
+              scale={cardDrivenProps.buttonScaleBadAnswer}
+              isDragOffBoundary={isDragOffBoundary}
+              onClick={() => handleActionBtnOnClick("left")}
+            />
+            <UserActionBtn
+              direction="right"
+              ariaLabel="swipe right"
+              scale={cardDrivenProps.buttonScaleGoodAnswer}
+              isDragOffBoundary={isDragOffBoundary}
+              onClick={() => handleActionBtnOnClick("right")}
+            />
+          </div>
         </div>
-        <div
-          id="actions"
-          className="relative z-10 flex w-full items-center justify-center gap-8"
-        >
-          <UserActionBtn
-            direction="left"
-            ariaLabel="swipe left"
-            scale={cardDrivenProps.buttonScaleBadAnswer}
-            isDragOffBoundary={isDragOffBoundary}
-            onClick={() => handleActionBtnOnClick("left")}
-          />
-          <UserActionBtn
-            direction="right"
-            ariaLabel="swipe right"
-            scale={cardDrivenProps.buttonScaleGoodAnswer}
-            isDragOffBoundary={isDragOffBoundary}
-            onClick={() => handleActionBtnOnClick("right")}
-          />
-        </div>
-        <Drawer
-          onClose={() => {
-            setRecentMatch(undefined);
-          }}
-        >
-          <DrawerTrigger ref={drawerRef}></DrawerTrigger>
-          <DrawerContent>
-            <DrawerHeader>
-              <DrawerTitle>MATCH FOUND</DrawerTitle>
-              <DrawerDescription>
-                You have matched with {recentMatch?.name}{" "}
-                <a
-                  href={`https://telegram.me/${recentMatch?.telegramId.split("@")[1]}`}
-                  target="_blank"
-                  className="text-blue-500"
-                >
-                  {recentMatch?.telegramId} <PiLink />
-                </a>
-              </DrawerDescription>
-            </DrawerHeader>
-            <DrawerFooter>
-              <DrawerClose>
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    setRecentMatch(undefined);
-                  }}
-                >
-                  Close
-                </Button>
-              </DrawerClose>
-            </DrawerFooter>
-          </DrawerContent>
-        </Drawer>
-      </div>
-    </motion.div>
+      </motion.div>
+
+      <Drawer
+        onClose={() => {
+          setRecentMatch(undefined);
+        }}
+      >
+        <DrawerTrigger ref={drawerRef}></DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>MATCH FOUND</DrawerTitle>
+            <DrawerDescription>
+              You have matched with {recentMatch?.name}{" "}
+              <a
+                href={`https://telegram.me/${recentMatch?.telegramId.split("@")[1]}`}
+                target="_blank"
+                className="text-blue-500"
+              >
+                {recentMatch?.telegramId} <PiLink />
+              </a>
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <DrawerClose>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setRecentMatch(undefined);
+                }}
+              >
+                Close
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 };
 
