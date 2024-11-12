@@ -1,0 +1,20 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always",
+    "source,organizeImports": "always"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/*.tsx": "${dirname} - ${filename}",
+    "**/hooks/**/*.ts": "${filename} - Hook",
+    "**/components/**/*.tsx": "${filename} - ${dirname} Component",
+    "**/lib/**/*.tsx": "${filename} - Library",
+    "**/utils/**/*.ts": "${filename} - Utility",
+    "**/types/**/*.ts": "${filename} - Type",
+    "**/stores/**/*.ts": "${filename} - Store",
+  }
+}
