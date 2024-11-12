@@ -11,10 +11,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 import { useLocalStorage } from "@/stores/localstorage";
 
 import UploadComponent from "./_components/upload";
-import { cn } from "@/lib/utils";
 
 type UploadResponse = {
   event: string;
@@ -192,7 +192,9 @@ export default function Signin() {
                 <div className="flex w-full items-center justify-center">
                   <label
                     htmlFor="pictures"
-                    className={cn(`flex min-h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed ${picturesError ? "border-red-500" :"border-gray-300"} ${picturesError ? "bg-red-50" :"bg-gray-50"} hover:bg-gray-100`)}
+                    className={cn(
+                      `flex min-h-32 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed ${picturesError ? "border-red-500" : "border-gray-300"} ${picturesError ? "bg-red-50" : "bg-gray-50"} hover:bg-gray-100`
+                    )}
                   >
                     <div className="flex flex-col items-center justify-center pb-6 pt-5">
                       <UploadComponent
@@ -205,6 +207,9 @@ export default function Signin() {
                     </div>
                   </label>
                 </div>
+                {picturesError && (
+                  <p className="text-sm text-red-500">{picturesError}</p>
+                )}
               </div>
 
               <div className="space-y-2">
