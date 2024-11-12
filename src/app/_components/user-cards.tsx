@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { PiLink } from "react-icons/pi";
 
+import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -23,7 +25,7 @@ import { CardSwipeDirection, IsDragOffBoundary } from "@/types/app";
 
 import UserActionBtn from "./user-action-btn";
 import UserCard from "./user-card";
-import { Button } from "@/components/ui/button";
+import UserCompletion from "./user-completion";
 
 export const initialDrivenProps = {
   cardWrapperX: 0,
@@ -33,7 +35,9 @@ export const initialDrivenProps = {
 
 const UserCards = () => {
   const [userCards, setUserCards] = useAppContext();
-  const [, setMatches] = useState<string[]>([]);
+  const [matches, setMatches] = useState<string[]>([]);
+  const drawerRef = useRef<HTMLButtonElement>(null);
+  const [recentMatch, setRecentMatch] = useState<UserInfo>();
   const [cardDrivenProps, setCardDrivenProps] = useState(initialDrivenProps);
   const [direction, setDirection] = useState<"left" | "right" | "">("");
   const [isDragging, setIsDragging] = useState(false);
@@ -55,17 +59,29 @@ const UserCards = () => {
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === "sessionUpdate") {
-        const filteredProfiles = data.users.filter(
-          (profile: UserInfo) => profile.telegramId !== userInfo.telegramId
-        ); // Exclude your own profile
+        const swipes = data.users.find((profile: UserInfo) => profile.telegramId === userInfo.telegramId)?.swipes;
+        const filteredProfiles = data.users.filter((profile: UserInfo) => {
+          // remove matches
+          return (
+            !swipes[profile.telegramId] &&
+            profile.telegramId !== userInfo.telegramId
+          );
+        }); // Exclude your own profile
         setUserCards(filteredProfiles);
       }
-      if (data.type === "match") setMatches((prev) => [...prev, data.handle]);
+      if (data.type === "match") {
+        setMatches((prev) => [...prev, data.handle]);
+        setRecentMatch(data.handle);
+      }
     };
     ws.onclose = () => console.log("Disconnected from WebSocket");
     setSocket(ws);
     return () => ws.close();
   }, [localstorageUserInfo]);
+
+  // console.log('backupUserCards', backupUserCards);
+
+  console.log('recentMatch', userCards);
 
   const swipeRight = async () => {
     const userInfo = localstorageUserInfo;
@@ -88,7 +104,7 @@ const UserCards = () => {
     nextProfile();
   };
   const nextProfile = () => {
-    setCurrentProfileIndex((prevIndex) => (prevIndex + 1) % userCards.length); // Loop endlessly
+    setCurrentProfileIndex((prevIndex) => (prevIndex + 1) % userCards.length);
   };
 
   useEffect(() => {
@@ -137,6 +153,13 @@ const UserCards = () => {
       transition: { duration: 0.5, ease: easeOutExpo },
     },
   };
+
+  useEffect(() => {
+    if (!drawerRef.current) return;
+    if (recentMatch) {
+      drawerRef.current.click();
+    }
+  }, [recentMatch]);
 
   return (
     <motion.div
@@ -192,6 +215,11 @@ const UserCards = () => {
                 </motion.div>
               );
             })}
+            {
+              userCards.length === 0 && (
+                <UserCompletion />
+              )
+            }
           </AnimatePresence>
         </div>
         <div
@@ -213,18 +241,36 @@ const UserCards = () => {
             onClick={() => handleActionBtnOnClick("right")}
           />
         </div>
-        <Drawer>
-          <DrawerTrigger>Open</DrawerTrigger>
+        <Drawer
+          onClose={() => {
+            setRecentMatch(undefined);
+          }}
+        >
+          <DrawerTrigger ref={drawerRef}></DrawerTrigger>
           <DrawerContent>
             <DrawerHeader>
               <DrawerTitle>MATCH FOUND</DrawerTitle>
               <DrawerDescription>
-                <
+                You have matched with {recentMatch?.name}{" "}
+                <a
+                  href={`https://telegram.me/${recentMatch?.telegramId.split("@")[1]}`}
+                  target="_blank"
+                  className="text-blue-500"
+                >
+                  {recentMatch?.telegramId} <PiLink />
+                </a>
               </DrawerDescription>
             </DrawerHeader>
             <DrawerFooter>
               <DrawerClose>
-                <Button variant="outline">Close</Button>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setRecentMatch(undefined);
+                  }}
+                >
+                  Close
+                </Button>
               </DrawerClose>
             </DrawerFooter>
           </DrawerContent>

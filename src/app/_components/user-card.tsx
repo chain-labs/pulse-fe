@@ -86,7 +86,6 @@ const UserCard = ({
           address: localStorage.getItem("walletAddress") ?? "",
         });
 
-        console.log("response: ----", response.result.transactions.total);
         setTotalTransactions(Number(response.result.transactions.total));
       } catch (e) {
         console.error(e);
@@ -141,7 +140,9 @@ const UserCard = ({
         <div className="flex w-full flex-col items-baseline justify-between">
           <h1 className="font-mono text-[32px] font-bold">{data.name}</h1>
           <p className="font-sans text-[16px]">{data.bio}</p>
-          <p className="rounded-full px-6 py-1 text-[12px] font-bold font-sans bg-[#FFB730] mx-auto">Total Transactions Done: 5</p>
+          <p className="mx-auto rounded-full bg-[#FFB730] px-6 py-1 font-sans text-[12px] font-bold">
+            Total Transactions Done: {totalTransactions}
+          </p>
         </div>
 
         {/* Add relevant data fields */}

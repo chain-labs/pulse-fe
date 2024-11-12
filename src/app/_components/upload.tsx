@@ -139,7 +139,7 @@ export default function UploadComponent({
       {beyondMaxLimit === false && (
         <CldUploadButton
           uploadPreset="find-your-pulse"
-          className="rounded bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-700 h-fit my-auto"
+          className="my-auto h-fit rounded bg-sky-500 px-4 py-2 font-bold text-white hover:bg-sky-700"
           onSuccess={handleUpload}
           options={{
             clientAllowedFormats: [
@@ -179,7 +179,7 @@ export default function UploadComponent({
             <Button
               onClick={() => handleDelete(uploadResponse.info.public_id)}
               variant={"destructive"}
-			  className="w-full"
+              className="w-full"
             >
               Delete ⬆️
             </Button>

@@ -9,6 +9,7 @@ Welcome to [App Name] ("we," "our," or "us"). This Privacy Policy explains how w
 ## 2. Information We Collect
 
 ### 2.1 Information You Provide
+
 - Personal identification information (name, email address, phone number, date of birth)
 - Government-issued ID verification for investment features
 - Profile information (photos, biography, interests, occupation)
@@ -18,6 +19,7 @@ Welcome to [App Name] ("we," "our," or "us"). This Privacy Policy explains how w
 - Professional background and work history
 
 ### 2.2 Automatically Collected Information
+
 - Device information (IP address, device ID, browser type)
 - Usage data (app features accessed, time spent, interactions)
 - Location data (with your consent)
@@ -26,6 +28,7 @@ Welcome to [App Name] ("we," "our," or "us"). This Privacy Policy explains how w
 ## 3. How We Use Your Information
 
 We use your information for:
+
 - Matching you with potential dates or professional connections
 - Facilitating investment opportunities and transactions
 - Verifying your identity and preventing fraud
@@ -38,6 +41,7 @@ We use your information for:
 ## 4. Data Sharing and Disclosure
 
 ### 4.1 We may share your information with:
+
 - Other users (as per your privacy settings)
 - Service providers and partners
 - Financial institutions (for investment features)
@@ -46,7 +50,9 @@ We use your information for:
 - New owners (in case of merger/acquisition)
 
 ### 4.2 International Data Transfers
+
 We comply with data transfer regulations including:
+
 - EU-US Data Privacy Framework
 - Standard Contractual Clauses
 - Binding Corporate Rules
@@ -54,6 +60,7 @@ We comply with data transfer regulations including:
 ## 5. Your Rights and Choices
 
 ### 5.1 You have the right to:
+
 - Access your personal data
 - Correct inaccurate data
 - Delete your data (right to be forgotten)
@@ -64,6 +71,7 @@ We comply with data transfer regulations including:
 - Opt-out of marketing communications
 
 ### 5.2 Regional Rights
+
 - California residents: CCPA rights
 - EU residents: GDPR rights
 - Canadian residents: PIPEDA rights
@@ -71,6 +79,7 @@ We comply with data transfer regulations including:
 ## 6. Data Security
 
 We implement appropriate technical and organizational measures to protect your data, including:
+
 - Encryption in transit and at rest
 - Access controls
 - Regular security assessments
@@ -80,6 +89,7 @@ We implement appropriate technical and organizational measures to protect your d
 ## 7. Data Retention
 
 We retain your data for:
+
 - Active accounts: Duration of account plus 30 days
 - Closed accounts: Up to 5 years for legal compliance
 - Financial records: As required by applicable laws
@@ -91,6 +101,7 @@ Our services are not intended for users under 18 years old. We do not knowingly 
 ## 9. Financial Services Compliance
 
 ### 9.1 Investment Features
+
 - KYC (Know Your Customer) requirements
 - Anti-money laundering compliance
 - Securities regulations compliance
@@ -99,6 +110,7 @@ Our services are not intended for users under 18 years old. We do not knowingly 
 ## 10. Cookie Policy
 
 We use cookies for:
+
 - Essential functionality
 - Performance monitoring
 - Personalization
@@ -116,6 +128,7 @@ Address: [Physical Address]
 ## 12. Changes to Privacy Policy
 
 We may update this Privacy Policy periodically. We will notify you of material changes via:
+
 - Email notification
 - In-app notification
 - Website announcement
@@ -123,21 +136,25 @@ We may update this Privacy Policy periodically. We will notify you of material c
 ## 13. Jurisdiction-Specific Provisions
 
 ### 13.1 European Union (GDPR)
+
 - Legal basis for processing
 - Data Protection Officer contact
 - Right to lodge complaints with supervisory authorities
 
 ### 13.2 California (CCPA/CPRA)
+
 - Categories of personal information collected
 - Sale of personal information
 - Shine the Light law compliance
 
 ### 13.3 Canada (PIPEDA)
+
 - Consent requirements
 - Access to information
 - Challenge compliance procedures
 
 ### 13.4 Australia (Privacy Act)
+
 - APP compliance
 - Overseas disclosure requirements
 - Privacy complaint procedures
@@ -145,17 +162,20 @@ We may update this Privacy Policy periodically. We will notify you of material c
 ## 14. Additional Provisions
 
 ### 14.1 Dating Features
+
 - Profile visibility controls
 - Messaging privacy
 - Photo sharing guidelines
 - User verification processes
 
 ### 14.2 Professional Networking
+
 - Connection privacy settings
 - Professional information sharing
 - Network visibility controls
 
 ### 14.3 Investment Features
+
 - Financial data protection
 - Investment privacy controls
 - Transaction confidentiality
