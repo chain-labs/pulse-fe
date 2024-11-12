@@ -125,8 +125,9 @@ export default function Signin() {
       <div className="relative mx-[16px] py-3">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle className="font-mono text-2xl font-bold">
-              Welcome to Stumble
+            <CardTitle className="font-mono text-[18px] font-bold">
+              Welcome to {" "}
+              <span className=" text-[36px] text-[#FFB730] font-sans font-bold tracking-[-0.05em] bg-black px-2 rounded-lg">{" "}Stumble</span>
             </CardTitle>
             <p>
               Create your account to get started. Your profile will be visible

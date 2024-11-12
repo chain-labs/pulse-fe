@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 
+import Footer from "@/components/global/footer";
+import Header from "@/components/global/header";
 import AppProvider from "@/stores/app-context";
 
 import { getUserCards } from "../../api/app.api";

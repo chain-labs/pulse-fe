@@ -3,6 +3,8 @@
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
 import { PiHeartDuotone, PiLink, PiUserCircleDuotone } from "react-icons/pi";
 
+import Footer from "@/components/global/footer";
+import Header from "@/components/global/header";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -39,6 +41,7 @@ const User = () => {
 
   return (
     <main className="bg-userSwipe-neutral mx-auto h-full min-h-screen">
+      <Header />
       <AnimatePresence mode="wait">
         <motion.div
           key="userScreen1"
@@ -51,6 +54,7 @@ const User = () => {
           <UserCards />
         </motion.div>
       </AnimatePresence>
+      <Footer />
       {/* user matches */}
       <Drawer>
         {!!Object.keys(matches).length && (
@@ -113,7 +117,7 @@ const User = () => {
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>PROFILE</DrawerTitle>
-            <DrawerDescription className="flex flex-wrap justify-start items-start gap-2 max-w-[300px] mx-auto">
+            <DrawerDescription className="mx-auto flex max-w-[300px] flex-wrap items-start justify-start gap-2">
               <SingleUserCard data={userData as UserInfo} id="user" />
             </DrawerDescription>
           </DrawerHeader>
