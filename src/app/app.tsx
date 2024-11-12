@@ -26,7 +26,7 @@ const User = () => {
   };
 
   return (
-    <main className="bg-userSwipe-neutral mx-auto h-full min-h-screen overflow-hidden">
+    <main className="bg-userSwipe-neutral mx-auto h-full min-h-screen ">
       <AnimatePresence mode="wait">
         {!isCardStockEmpty ? (
           <motion.div

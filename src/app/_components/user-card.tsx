@@ -72,43 +72,7 @@ const UserCard = ({
   return (
     <>
       <motion.div
-        id={`cardDriverWrapper-${id}`}
-        // className={`absolute aspect-[100/150] w-full ${
-        //   !isDragging ? "hover:cursor-grab" : ""
-        // }`}
-        drag="x"
-        dragSnapToOrigin
-        dragElastic={isMobile ? 0.2 : 0.06}
-        dragConstraints={{ left: 0, right: 0 }}
-        dragTransition={{ bounceStiffness: 1000, bounceDamping: 50 }}
-        onDragStart={() => setIsDragging(true)}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
-        onDrag={(_, info) => {
-          const offset = info.offset.x;
-
-          if (offset < 0 && offset < offsetBoundary * -1) {
-            setIsDragOffBoundary("left");
-          } else if (offset > 0 && offset > offsetBoundary) {
-            setIsDragOffBoundary("right");
-          } else {
-            setIsDragOffBoundary(null);
-          }
-        }}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
-        onDragEnd={(_, info) => {
-          setIsDragging(false);
-          setIsDragOffBoundary(null);
-          const isOffBoundary =
-            info.offset.x > offsetBoundary || info.offset.x < -offsetBoundary;
-          const direction = info.offset.x > 0 ? "right" : "left";
-
-          if (isOffBoundary) {
-            setDirection(direction);
-          }
-        }}
-        // id={`cardContent-${id}`}
+        id={`cardContent-${id}`}
         className="absolute aspect-[100/150] w-full select-none rounded-lg bg-white p-2 shadow-card"
         style={{
           x: drivenX,
@@ -198,3 +162,4 @@ const UserCard = ({
 };
 
 export default UserCard;
+

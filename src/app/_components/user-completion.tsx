@@ -17,7 +17,7 @@ const UserCompletion = () => {
   return (
     <div
       className={
-        "flex h-full min-h-screen flex-col items-center justify-center overflow-hidden p-5"
+        "flex h-full min-h-screen flex-col items-center justify-center p-5"
       }
     >
       <div
