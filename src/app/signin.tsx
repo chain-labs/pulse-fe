@@ -208,7 +208,7 @@ export default function Signin() {
                     {...register("isAdult")}
                     className="mr-2 h-4 w-4"
                   />
-                  *I confirm that I am at least 18 years old and I'm using this
+                  *I confirm that I am at least 18 years old and I&apos;m using this
                   app with my own consent.
                 </Label>
                 {errors.isAdult && (
