@@ -55,6 +55,9 @@ const User = z.object({
     .string()
     .min(10, "Bio must be at least 10 characters")
     .max(150, "Bio must not exceed 150 characters"),
+  isAdult: z.boolean().refine((val) => val === true, {
+    message: "Mandatory to confirm you are at least 18 years old",
+  }),
 });
 
 type UserInfo = z.infer<typeof User>;
@@ -96,11 +99,17 @@ export default function Signin() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center bg-gray-100 py-6 sm:py-12">
+    <div className="flex min-h-screen flex-col justify-center py-6 sm:py-12">
       <div className="relative mx-[16px] py-3">
         <Card className="w-full">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">Sign In</CardTitle>
+            <CardTitle className="text-2xl font-bold">
+              Welcome to Pulse
+            </CardTitle>
+            <p>
+              Create your account to get started. Your profile will be visible
+              to other users.
+            </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -176,9 +185,44 @@ export default function Signin() {
                 </div>
               </div>
 
+              <div className="space-y-2">
+                <Label htmlFor="isAdult" className="flex items-center gap-2">
+                  <Input
+                    type="checkbox"
+                    id="isAdult"
+                    {...register("isAdult")}
+                    className="mr-2 h-4 w-4"
+                  />
+                  I confirm that I am at least 18 years old
+                </Label>
+                {errors.isAdult && (
+                  <p className="text-sm text-red-500">
+                    {errors.isAdult.message}
+                  </p>
+                )}
+              </div>
+
               <Button type="submit" className="w-full">
                 Submit
               </Button>
+              <span>
+                by submitting you agree to our{" "}
+                <a
+                  href="https://github.com/chain-labs/pulse-fe/blob/main/terms-conditions.md"
+                  target="_blank"
+                  className="text-blue-500"
+                >
+                  terms of service
+                </a>{" "}
+                and{" "}
+                <a
+                  href="https://github.com/chain-labs/pulse-fe/blob/main/privacy-policy.md"
+                  target="_blank"
+                  className="text-blue-500"
+                >
+                  privacy policy
+                </a>
+              </span>
             </form>
           </CardContent>
         </Card>
