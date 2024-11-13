@@ -111,13 +111,12 @@ const User = () => {
       </Drawer>
       {/* user profile and setting mode  */}
       <Drawer>
-        {!!Object.keys(matches).length && (
-          <DrawerTrigger className="fixed bottom-0 left-0 m-4">
-            <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
-              <PiUserCircleDuotone className="scale-[1.75] text-[#5cfda2]" />
-            </Button>
-          </DrawerTrigger>
-        )}
+        <DrawerTrigger className="fixed bottom-0 left-0 m-4">
+          <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
+            <PiUserCircleDuotone className="scale-[1.75] text-[#5cfda2]" />
+          </Button>
+        </DrawerTrigger>
+
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>PROFILE</DrawerTitle>
