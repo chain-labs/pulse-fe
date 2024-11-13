@@ -129,8 +129,8 @@ const User = () => {
           <DrawerHeader>
             <DrawerTitle>PROFILE</DrawerTitle>
             <DrawerDescription className="mx-auto flex max-w-[300px] flex-wrap items-start justify-start gap-2 text-black">
-              <div className="flex justify-center items-center gap-4">
-                <h1 className="font-mono font-semibold">MODE: {" "}</h1>
+              <div className="flex items-center justify-center gap-4">
+                <h1 className="font-mono font-semibold">MODE: </h1>
                 <Select
                   defaultValue={userData.mode}
                   onValueChange={(value: "date" | "network" | "invest") => {

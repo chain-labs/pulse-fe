@@ -126,8 +126,11 @@ export default function Signin() {
         <Card className="w-full">
           <CardHeader>
             <CardTitle className="font-mono text-[18px] font-bold">
-              Welcome to {" "}
-              <span className=" text-[36px] text-[#FFB730] font-sans font-bold tracking-[-0.05em] bg-black px-2 rounded-lg">{" "}Stumble</span>
+              Welcome to{" "}
+              <span className="rounded-lg bg-black px-2 font-sans text-[36px] font-bold tracking-[-0.05em] text-[#FFB730]">
+                {" "}
+                Stumble
+              </span>
             </CardTitle>
             <p>
               Create your account to get started. Your profile will be visible

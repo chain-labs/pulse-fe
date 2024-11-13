@@ -60,7 +60,7 @@ export default function SingleUserCard({
   }, [localstorageUserInfo]);
   return (
     <>
-      <motion.div className="relative mx-auto grid w-full grid-cols-2 gap-2 items-center">
+      <motion.div className="relative mx-auto grid w-full grid-cols-2 items-center gap-2">
         {data.picturesUrl.map((url, idx) => (
           <motion.img
             //   layoutId={`user-card-image-${idx}`}
@@ -71,7 +71,7 @@ export default function SingleUserCard({
             width={100}
             height={100}
             style={{
-                gridColumn: data.picturesUrl.length === 1 ? "1/3" : "",
+              gridColumn: data.picturesUrl.length === 1 ? "1/3" : "",
             }}
             className={
               "aspect-square h-auto max-h-[300px] w-auto cursor-pointer rounded-lg object-cover transition-opacity duration-500"
@@ -79,7 +79,7 @@ export default function SingleUserCard({
           />
         ))}
       </motion.div>
-      <div className="flex w-full flex-col items-baseline justify-between gap-2 h-fit mt-auto">
+      <div className="mt-auto flex h-fit w-full flex-col items-baseline justify-between gap-2">
         <h1 className="font-mono text-[32px] font-bold">{data.name}</h1>
         <p className="font-sans text-[16px]">{data.bio}</p>
 
