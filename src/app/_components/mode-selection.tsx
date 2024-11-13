@@ -25,7 +25,7 @@ export default function ModeSelection() {
   console.log("modeData", mode);
   return (
     <Select
-      defaultValue={mode}
+      value={mode}
       onValueChange={(value: "date" | "network" | "invest") => {
         modeData?.setMode(value);
       }}
