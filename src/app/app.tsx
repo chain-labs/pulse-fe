@@ -90,10 +90,10 @@ const User = () => {
                       </a>
                     </span>
                   </div>
-                  <span className="overflow-hidden text-ellipsis whitespace-nowrap text-nowrap">
+                  <span className="text-start">
                     {matches[telegramId].bio}
                   </span>
-                  <hr />
+                  <hr className="my-2" />
                 </div>
               ))}
             </DrawerDescription>
