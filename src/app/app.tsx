@@ -1,7 +1,12 @@
 "use client";
 
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
-import { PiHeartDuotone, PiLink, PiUserCircleDuotone } from "react-icons/pi";
+import {
+  PiHeartDuotone,
+  PiInfoDuotone,
+  PiLink,
+  PiUserCircleDuotone,
+} from "react-icons/pi";
 
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
@@ -90,9 +95,7 @@ const User = () => {
                       </a>
                     </span>
                   </div>
-                  <span className="text-start">
-                    {matches[telegramId].bio}
-                  </span>
+                  <span className="text-start">{matches[telegramId].bio}</span>
                   <hr className="my-2" />
                 </div>
               ))}
@@ -119,6 +122,36 @@ const User = () => {
             <DrawerTitle>PROFILE</DrawerTitle>
             <DrawerDescription className="mx-auto flex max-w-[300px] flex-wrap items-start justify-start gap-2">
               <SingleUserCard data={userData as UserInfo} id="user" />
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <DrawerClose>
+              <Button variant="outline">Close</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+      {/* Information */}
+      <Drawer>
+        <DrawerTrigger className="fixed right-0 top-0 m-4">
+          <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
+            <PiInfoDuotone className="scale-[1.75] text-blue-500" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>INFORMATION</DrawerTitle>
+            <DrawerDescription>
+              <p>
+                Welcome to Stumble, the go-to platform where Web3 enthusiasts
+                gather, swipe, and match to form meaningful connections. Immerse
+                yourself in a network designed for the digital pioneers and
+                blockchain advocates who share your vision and humor. Whether
+                you&apos;re here to exchange ideas, collaborate on projects, or
+                simply revel in the latest trending memes, Stumble ensures you
+                find your community and thrive within the shared culture of the
+                Web3 movement
+              </p>
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
