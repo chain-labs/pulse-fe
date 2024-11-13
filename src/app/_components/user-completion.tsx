@@ -25,10 +25,7 @@ const UserCompletion = () => {
             Among the individuals in your network, consider refreshing the page
             or switching modes to optimize your experience.
           </h1>
-          <motion.div
-            className="mt-8 flex items-center justify-center gap-4"
-            whileTap={{ scale: 0.9 }}
-          >
+          <div className="mt-8 flex items-center justify-center gap-4">
             <Button
               onClick={() => {
                 window.location.reload();
@@ -39,7 +36,7 @@ const UserCompletion = () => {
             </Button>{" "}
             {" / "}
             <ModeSelection />
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </div>
