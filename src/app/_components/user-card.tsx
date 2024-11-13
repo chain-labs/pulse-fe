@@ -75,7 +75,7 @@ const UserCard = ({
     <>
       <motion.div
         id={`cardContent-${id}`}
-        className="absolute grid aspect-[100/150] w-full select-none grid-flow-row rounded-lg bg-white p-4 shadow-card"
+        className="absolute grid aspect-[100/150] w-full select-none grid-flow-row rounded-lg bg-white p-4 shadow-2xl"
         style={{
           x: drivenX,
           y: drivenY,
