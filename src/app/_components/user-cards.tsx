@@ -51,7 +51,11 @@ const UserCards = () => {
     const ws = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL ?? "");
     ws.onopen = () => {
       ws.send(
-        JSON.stringify({ type: "join", sessionId: "global-session", userInfo })
+        JSON.stringify({
+          type: "join",
+          sessionId: localstorageUserInfo.mode,
+          userInfo,
+        })
       );
     };
     ws.onmessage = (event) => {
@@ -83,7 +87,7 @@ const UserCards = () => {
       await socket.send(
         JSON.stringify({
           type: "swipe",
-          sessionId: "global-session",
+          sessionId: userInfo.mode,
           userInfo,
           swipeTarget: currentProfile.telegramId,
         })

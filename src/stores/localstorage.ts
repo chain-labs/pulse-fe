@@ -16,6 +16,20 @@ function setItemToLocalStorage(key: string, value: string) {
   localStorage.setItem(key, value);
 }
 
+function settingRootCssVariable(mode: "date" | "network" | "invest") {
+  "use client";
+
+  if (typeof window === "undefined") return;
+
+  document.body.style.setProperty("--app-background", MODE_BG_COLORS[mode]);
+}
+
+export const MODE_BG_COLORS = {
+  date: "#FFB730",
+  network: "#bfddf7",
+  invest: "#a0d9a2",
+};
+
 export const useLocalStorage = create<LocalStorage>()((set) => ({
   name: getItemFromLocalStorage("name") || undefined,
   walletAddress:
@@ -32,6 +46,20 @@ export const useLocalStorage = create<LocalStorage>()((set) => ({
       getItemFromLocalStorage("picturesUrl")
   ),
   matches: JSON.parse(getItemFromLocalStorage("matches") || "{}"),
+  mode: (() => {
+    const gettingMode = getItemFromLocalStorage("mode") as
+      | "date"
+      | "network"
+      | "invest"
+      | undefined;
+    if (!gettingMode) {
+      setItemToLocalStorage("mode", "date");
+      settingRootCssVariable("date");
+      return "date";
+    }
+    settingRootCssVariable(gettingMode);
+    return gettingMode;
+  })(),
   setName: (name: string) => {
     setItemToLocalStorage("name", name);
     set({ name });
@@ -60,5 +88,11 @@ export const useLocalStorage = create<LocalStorage>()((set) => ({
     matches[match.telegramId] = match;
     setItemToLocalStorage("matches", JSON.stringify(matches));
     set({ matches: JSON.parse(getItemFromLocalStorage("matches") || "{}") });
+  },
+  setMode: (mode: "date" | "network" | "invest") => {
+    // setting the global rootcss variable
+    settingRootCssVariable(mode);
+    setItemToLocalStorage("mode", JSON.stringify(mode));
+    set({ mode });
   },
 }));

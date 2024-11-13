@@ -21,7 +21,15 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useLocalStorage } from "@/stores/localstorage";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { MODE_BG_COLORS, useLocalStorage } from "@/stores/localstorage";
 
 import { UserCards } from "./_components";
 import SingleUserCard from "./_components/single-user-card";
@@ -108,7 +116,7 @@ const User = () => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-      {/* user profile  */}
+      {/* user profile and setting mode  */}
       <Drawer>
         {!!Object.keys(matches).length && (
           <DrawerTrigger className="fixed bottom-0 left-0 m-4">
@@ -120,7 +128,61 @@ const User = () => {
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>PROFILE</DrawerTitle>
-            <DrawerDescription className="mx-auto flex max-w-[300px] flex-wrap items-start justify-start gap-2">
+            <DrawerDescription className="mx-auto flex max-w-[300px] flex-wrap items-start justify-start gap-2 text-black">
+              <div className="flex justify-center items-center gap-4">
+                <h1 className="font-mono font-semibold">MODE: {" "}</h1>
+                <Select
+                  defaultValue={userData.mode}
+                  onValueChange={(value: "date" | "network" | "invest") => {
+                    userData?.setMode(value);
+                  }}
+                >
+                  <SelectTrigger
+                    style={{ backgroundColor: "var(--app-background)" }}
+                    className={cn(
+                      `gap-4 rounded-full bg-[${MODE_BG_COLORS[userData.mode]}]`
+                    )}
+                  >
+                    <SelectValue placeholder="Mode" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem
+                      value="date"
+                      style={{
+                        backgroundColor:
+                          userData.mode === "date"
+                            ? MODE_BG_COLORS.date
+                            : "transparent",
+                      }}
+                    >
+                      Date
+                    </SelectItem>
+                    <SelectItem
+                      style={{
+                        backgroundColor:
+                          userData.mode === "network"
+                            ? MODE_BG_COLORS.network
+                            : "transparent",
+                      }}
+                      value="network"
+                    >
+                      Network
+                    </SelectItem>
+                    <SelectItem
+                      style={{
+                        backgroundColor:
+                          userData.mode === "invest"
+                            ? MODE_BG_COLORS.invest
+                            : "transparent",
+                      }}
+                      value="invest"
+                    >
+                      Invest
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <hr className="my-2" />
               <SingleUserCard data={userData as UserInfo} id="user" />
             </DrawerDescription>
           </DrawerHeader>
