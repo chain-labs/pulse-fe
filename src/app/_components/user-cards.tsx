@@ -261,7 +261,7 @@ const UserCards = () => {
               <a
                 href={`https://telegram.me/${recentMatch?.telegramId.split("@")[1]}`}
                 target="_blank"
-                className="text-blue-500 flex justify-center items-center gap-2"
+                className="flex items-center justify-center gap-2 text-blue-500"
               >
                 {recentMatch?.telegramId} <PiLink />
               </a>
