@@ -21,10 +21,12 @@ export default function Home() {
   return (
     <div className="mx-auto min-h-screen w-full max-w-[700px]">
       {loading && (
-        <div className="flex h-screen items-center justify-center ">
-          <div className="aspect-[100/150] w-[300px] rounded-xl flex items-center justify-center bg-gradient-to-br from-black/10 to-black/0 shadow-2xl backdrop-blur-sm">
+        <div className="flex h-screen items-center justify-center">
+          <div className="flex aspect-[100/150] w-[300px] items-center justify-center rounded-xl bg-gradient-to-br from-black/10 to-black/0 shadow-2xl backdrop-blur-sm">
             <Skeleton className="bg-transparent">
-              <h1 className="font-bold font-sans text-[24px] text-center">🚀LAUNCHING THE APP...🚀</h1>
+              <h1 className="text-center font-sans text-[24px] font-bold">
+                🚀LAUNCHING THE APP...🚀
+              </h1>
             </Skeleton>
           </div>
         </div>

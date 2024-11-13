@@ -193,8 +193,11 @@ export default function Signin() {
 
               <div className="space-y-2">
                 <Label htmlFor="pictures">Profile Pictures (1-3)</Label>
-                <br/>
-                <span className="text-xs text-gray-500">Please note: If the upload function is not working, consider switching to a different browser.</span>
+                <br />
+                <span className="text-xs text-gray-500">
+                  Please note: If the upload function is not working, consider
+                  switching to a different browser.
+                </span>
                 <div className="flex w-full items-center justify-center">
                   <label
                     htmlFor="pictures"
