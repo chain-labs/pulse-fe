@@ -20,6 +20,7 @@ const UserCompletion = () => {
           }}
           className="relative z-10 flex flex-col items-center justify-center text-center"
         >
+          <div className="mb-8 text-9xl">🥲</div>
           <h1 className="leading-tight">
             Among the individuals in your network, consider refreshing the page
             or switching modes to optimize your experience.
