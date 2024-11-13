@@ -219,25 +219,27 @@ const UserCards = () => {
               )}
             </AnimatePresence>
           </div>
-          <div
-            id="actions"
-            className="relative z-10 flex w-full items-center justify-center gap-8"
-          >
-            <UserActionBtn
-              direction="left"
-              ariaLabel="swipe left"
-              scale={cardDrivenProps.buttonScaleBadAnswer}
-              isDragOffBoundary={isDragOffBoundary}
-              onClick={() => handleActionBtnOnClick("left")}
-            />
-            <UserActionBtn
-              direction="right"
-              ariaLabel="swipe right"
-              scale={cardDrivenProps.buttonScaleGoodAnswer}
-              isDragOffBoundary={isDragOffBoundary}
-              onClick={() => handleActionBtnOnClick("right")}
-            />
-          </div>
+          {userCards.length > 0 && (
+            <div
+              id="actions"
+              className="relative z-10 flex w-full items-center justify-center gap-8"
+            >
+              <UserActionBtn
+                direction="left"
+                ariaLabel="swipe left"
+                scale={cardDrivenProps.buttonScaleBadAnswer}
+                isDragOffBoundary={isDragOffBoundary}
+                onClick={() => handleActionBtnOnClick("left")}
+              />
+              <UserActionBtn
+                direction="right"
+                ariaLabel="swipe right"
+                scale={cardDrivenProps.buttonScaleGoodAnswer}
+                isDragOffBoundary={isDragOffBoundary}
+                onClick={() => handleActionBtnOnClick("right")}
+              />
+            </div>
+          )}
         </div>
       </motion.div>
 
