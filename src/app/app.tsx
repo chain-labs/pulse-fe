@@ -115,7 +115,7 @@ const User = () => {
       {/* user matches */}
       <Drawer>
         {!!Object.keys(matches).length && (
-          <DrawerTrigger className="fixed bottom-0 right-0 m-4">
+          <DrawerTrigger className="fixed bottom-0 right-0 m-4 z-10">
             <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
               <PiHeartDuotone className="scale-[1.75] text-[#e40829]" />
             </Button>
@@ -162,7 +162,7 @@ const User = () => {
       </Drawer>
       {/* user profile and setting mode  */}
       <Drawer>
-        <DrawerTrigger className="fixed bottom-0 left-0 m-4">
+        <DrawerTrigger className="fixed bottom-0 left-0 m-4 z-10">
           <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
             <PiUserCircleDuotone className="scale-[1.75] text-[#5cfda2]" />
           </Button>
@@ -189,7 +189,7 @@ const User = () => {
       </Drawer>
       {/* Information */}
       <Drawer>
-        <DrawerTrigger className="fixed right-0 top-0 m-4">
+        <DrawerTrigger className="fixed right-0 top-0 m-4 z-10">
           <Button className="aspect-square h-[50px] w-[50px] rounded-full bg-white">
             <PiInfoDuotone className="scale-[1.75] text-blue-500" />
           </Button>
