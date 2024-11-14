@@ -52,9 +52,11 @@ const User = () => {
     if (!userData.walletAddress) return;
     async function getTransactions() {
       try {
-        await Moralis.start({
-          apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
-        });
+        if (!Moralis.Core.isStarted) {
+          await Moralis.start({
+            apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
+          });
+        }
 
         const responseBase = Moralis.EvmApi.wallets.getWalletStats({
           chain: "0x2105",
