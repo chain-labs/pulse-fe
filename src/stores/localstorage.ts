@@ -46,6 +46,8 @@ export const useLocalStorage = create<LocalStorage>()((set) => ({
       getItemFromLocalStorage("picturesUrl")
   ),
   matches: JSON.parse(getItemFromLocalStorage("matches") || "{}"),
+  memecoinBalance: JSON.parse(getItemFromLocalStorage("memecoinBalance") || "0"),
+  totalTransactions: JSON.parse(getItemFromLocalStorage("totalTransactions") || "0"),
   mode: (() => {
     const gettingMode = getItemFromLocalStorage("mode") as
       | "date"
@@ -94,5 +96,13 @@ export const useLocalStorage = create<LocalStorage>()((set) => ({
     settingRootCssVariable(mode);
     setItemToLocalStorage("mode", JSON.stringify(mode));
     set({ mode });
+  },
+  setMemecoinBalance: (memecoinBalance: string) => {
+    setItemToLocalStorage("memecoinBalance", JSON.stringify(memecoinBalance));
+    set({ memecoinBalance });
+  },
+  setTotalTransactions: (totalTransactions: string) => {
+    setItemToLocalStorage("totalTransactions", JSON.stringify(totalTransactions));
+    set({ totalTransactions });
   },
 }));

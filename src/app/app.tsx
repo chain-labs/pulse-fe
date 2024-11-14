@@ -1,6 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
+
 import { AnimatePresence, cubicBezier, motion } from "framer-motion";
+import Moralis from "moralis";
 import {
   PiHeartDuotone,
   PiInfoDuotone,
@@ -44,6 +47,65 @@ const User = () => {
       transition: { duration: 0.2, ease: cubicBezier(0.7, 0, 0.84, 0) },
     },
   };
+
+  useEffect(() => {
+    if (!userData.walletAddress) return;
+    async function getTransactions() {
+      try {
+        await Moralis.start({
+          apiKey: process.env.NEXT_PUBLIC_MORALIS_API_KEY,
+        });
+
+        const responseBase = Moralis.EvmApi.wallets.getWalletStats({
+          chain: "0x2105",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        const responseEth = Moralis.EvmApi.wallets.getWalletStats({
+          chain: "0x1",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        const responseOptimism = Moralis.EvmApi.wallets.getWalletStats({
+          chain: "0xa",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        const responseArbitrum = Moralis.EvmApi.wallets.getWalletStats({
+          chain: "0xa4b1",
+          address: localStorage.getItem("walletAddress") ?? "",
+        });
+
+        const responseMemecoin =
+          await Moralis.EvmApi.token.getWalletTokenBalances({
+            tokenAddresses: ["0xb131f4A55907B10d1F0A50d8ab8FA09EC342cd74"],
+            address: localStorage.getItem("walletAddress") ?? "",
+          });
+
+        userData.setMemecoinBalance(
+          String(
+            Number(
+              responseMemecoin.result.length > 0
+                ? responseMemecoin.result[0].amount
+                : 0
+            ) / Math.pow(10, 18)
+          )
+        );
+
+        userData.setTotalTransactions(
+          String(
+            Number((await responseBase).result.transactions.total) +
+              Number((await responseEth).result.transactions.total) +
+              Number((await responseOptimism).result.transactions.total) +
+              Number((await responseArbitrum).result.transactions.total)
+          )
+        );
+      } catch (error) {
+        console.log("error", error);
+      }
+    }
+    getTransactions();
+  }, [userData.walletAddress]);
 
   return (
     <main className="bg-userSwipe-neutral mx-auto h-full min-h-screen">
