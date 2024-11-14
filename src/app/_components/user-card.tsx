@@ -9,7 +9,6 @@ import {
   useMotionValueEvent,
   useTransform,
 } from "framer-motion";
-import Moralis from "moralis";
 import { useMediaQuery } from "usehooks-ts";
 
 import { useLocalStorage } from "@/stores/localstorage";

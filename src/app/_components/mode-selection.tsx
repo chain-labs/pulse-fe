@@ -22,7 +22,6 @@ export default function ModeSelection() {
     if (typeof window === "undefined") return;
     modeData.setMode(mode as "date" | "network" | "invest");
   }, []);
-  console.log("modeData", mode);
   return (
     <Select
       value={mode}

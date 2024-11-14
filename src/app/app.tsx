@@ -48,19 +48,6 @@ const User = () => {
   return (
     <main className="bg-userSwipe-neutral mx-auto h-full min-h-screen">
       <Header />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key="userScreen1"
-          id="userScreen"
-          variants={userScreenVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          <UserCards />
-        </motion.div>
-      </AnimatePresence>
-      <Footer />
       {/* user matches */}
       <Drawer>
         {!!Object.keys(matches).length && (
@@ -166,6 +153,19 @@ const User = () => {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+      <Footer />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key="userScreen1"
+          id="userScreen"
+          variants={userScreenVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+        >
+          <UserCards />
+        </motion.div>
+      </AnimatePresence>
     </main>
   );
 };

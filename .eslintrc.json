@@ -23,7 +23,9 @@
       "error",
       {
         // all folders within src (except _)should be named in kebab-case
-        "src/**/!(_)": "KEBAB_CASE"
+        "src/**/!(_)": "KEBAB_CASE",
+        // all folders within src (except [...])should be named in kebab-case
+        "src/**/![...]/": "KEBAB_CASE",
       }
     ]
   }
